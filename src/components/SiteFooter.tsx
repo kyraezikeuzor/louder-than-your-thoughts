@@ -1,1 +1,30 @@
-export function SiteFooter(){return <div dangerouslySetInnerHTML={{__html:"<footer>\n  <div class=\"wrap footer-grid\">\n    <div>\n      <h3>Louder Than Your Thoughts</h3>\n      <p style=\"opacity:0.7; max-width:32ch; margin-top:8px;\">A mental health podcast for teens, hosted by Sophie Xu, exploring the mental atlas one episode at a time.</p>\n    </div>\n    <ul class=\"foot-links\">\n      <li><span>Instagram</span></li>\n      <li><span>TikTok</span></li>\n      <li><span>Spotify</span></li>\n      <li><a href=\"/share-your-story\">Contact</a></li>\n    </ul>\n  </div>\n  <p class=\"foot-fine wrap\">This podcast offers peer support and general education. It is not a substitute for professional medical or mental health advice. If you are in crisis, call or text 988, or call 911.</p>\n</footer>"}} />;}
+import Link from "next/link";
+
+export function SiteFooter() {
+  return (
+    <footer className="site-footer">
+      <div className="wrap">
+        <div className="footer-card">
+          <div className="footer-main">
+            <div>
+              <p className="footer-title">Louder Than Your Thoughts</p>
+              <p className="footer-sub">A mental health organization for teens, started by Sophie Xu.</p>
+            </div>
+            <Link href="/share-your-story" className="footer-btn">Contact us</Link>
+          </div>
+          <div className="footer-fine">
+            <ul className="foot-links">
+              <li>Instagram</li>
+              <li>TikTok</li>
+              <li>Spotify</li>
+            </ul>
+            <p>
+              Louder Than Your Thoughts offers peer support and general education. It is not a substitute for
+              professional medical or mental health advice. If you are in crisis, call or text 988, or call 911.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}

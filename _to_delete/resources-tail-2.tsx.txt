@@ -1,0 +1,87 @@
+  return (
+    <main id="main" className="page">
+      <PageHeader
+        eyebrow="Resources"
+        title="Teen mental health resources"
+        subtitle="Search by what you're feeling or filter by the kind of support you want. Every card links to the organization's official website."
+      />
+
+      <div className="rise rise-2">
+        <aside className="crisis" aria-label="Urgent support">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 8v5M12 16h.01" />
+          </svg>
+          <div>
+            <strong>Need support right now?</strong>
+            <p>
+              In the U.S., call or text <a href="tel:988">988</a> for a trained crisis counselor. If you are in immediate
+              danger, call <a href="tel:911">911</a>.
+            </p>
+          </div>
+        </aside>
+
+        <label className="search">
+          <span className="sr-only">Search mental health resources</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <path d="M20 20l-3.5-3.5" />
+          </svg>
+          <input
+            type="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search by resource, topic, or organization"
+          />
+        </label>
+
+        <div className="filters" role="group" aria-label="Filter by support type">
+          {categories.map((item) => (
+            <button key={item} type="button" aria-pressed={category === item} onClick={() => setCategory(item)}>
+              {item}
+            </button>
+          ))}
+        </div>
+
+        <div className="results-bar" aria-live="polite">
+          <p>
+            {filteredResources.length} {filteredResources.length === 1 ? "resource" : "resources"}
+          </p>
+          {(query || category !== "All") && (
+            <button type="button" onClick={() => { setQuery(""); setCategory("All"); }}>
+              Clear filters
+            </button>
+          )}
+        </div>
+
+        {filteredResources.length > 0 ? (
+          <div className="resource-grid">
+            {filteredResources.map((resource) => (
+              <a
+                className={`card resource${resource.urgent ? " urgent" : ""}`}
+                href={resource.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                key={resource.name}
+              >
+                <h2>{resource.name}</h2>
+                <p>{resource.description}</p>
+                <span className="resource-action">{resource.action} ↗</span>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <div className="card empty">
+            <h2>No resources match that search.</h2>
+            <p className="muted" style={{ margin: 0 }}>Try a broader word or clear the filters to see everything.</p>
+          </div>
+        )}
+
+        <p className="fine" style={{ marginTop: 20 }}>
+          These links offer information and support, but they are not a substitute for care from a qualified mental health
+          professional. Availability and services may vary by location.
+        </p>
+      </div>
+    </main>
+  );
+}
